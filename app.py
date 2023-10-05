@@ -5,13 +5,13 @@ from functools import wraps
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "^A%DJAJU^JJ123"
-app.config['MYSQL_HOST'] = 'produktivitasalatberat.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'produktivitasala'
-app.config['MYSQL_PASSWORD'] = 'oeealatberat123'
-app.config['MYSQL_DB'] = 'produktivitasala$oeealatberat'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['SECRET_KEY'] = "------------------------------"
+app.config['MYSQL_HOST'] = '-----------------------------'
+app.config['MYSQL_USER'] = '-----------------------'
+app.config['MYSQL_PASSWORD'] = '---------------------'
+app.config['MYSQL_DB'] = '-----------------------'
+app.config['MYSQL_PORT'] = -----------------
+app.config['MYSQL_CURSORCLASS'] = '---------------------'
 mysql = MySQL(app)
 
 
@@ -155,7 +155,7 @@ def register_admin():
         password = request.form['password'].encode('utf-8')
         hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
 
-        if otp == 'heavy':
+        if otp == '-------------------???':
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO users_admin (name, email, password) VALUES (%s,%s,%s)",
                         (name, email, hash_password,))
@@ -190,7 +190,3 @@ def logout():
     session.clear()
     return render_template("home.html")
 
-#if __name__ == '__main__':
-#    app.secret_key = "^A%DJAJU^JJ123"
-#    app.run(debug=True)
-#    #app.run(host='0.0.0.0', debug=True)
