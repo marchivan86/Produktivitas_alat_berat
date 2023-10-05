@@ -1,0 +1,194 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="static/js/script1.js"></script> -->
+
+<script>
+  let dataFromAPI = null; // Variabel untuk menyimpan data dari Google API
+
+  // Fungsi untuk mengambil data dari URL API saat halaman pertama kali dimuat
+  function fetchData() {
+    fetch('https://script.google.com/macros/s/AKfycbx8vcshtERZcIDet3ytgu8OJn0tkTAGYb8C3ID7MHz2CNBxjxCIdBQ46da3iUw4QX8/exec')
+      .then((response) => response.json())
+      .then((data) => {
+        dataFromAPI = data.data; // Menyimpan data dari API dalam variabel
+        //displayTable(data.data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  // Fungsi untuk menampilkan tabel
+  function displayTable(data) {
+    const tableBody = document.querySelector('#data-table tbody');
+    tableBody.innerHTML = ''; // Mengosongkan tabel sebelum menambahkan data baru
+
+    // Menambahkan data ke tabel
+    for (const row of data) {
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${row.Category}</td>
+        <td>${row.Description}</td>
+        <td>${row.Parts_No}</td>
+        <td>${row.Qty}</td>
+        <td>${row.Units}</td>
+        <td>${row.Promo_Price}</td>
+      `;
+      tableBody.appendChild(newRow);
+    }
+  }
+
+  // Fungsi untuk memfilter tabel berdasarkan header yang dipilih
+  function filterTable() {
+    const selectedHeader = document.getElementById('headerSelect').value;
+
+    if (dataFromAPI === null) {
+      // Data belum dimuat, panggil fetchData
+      fetchData();
+    } else {
+      // Data sudah dimuat, filter tabel berdasarkan data yang sudah ada
+      const filteredData = dataFromAPI.filter((row) => row[selectedHeader] === 1);
+      displayTable(filteredData);
+      calculateTotalPrice(); // Panggil fungsi calculateTotalPrice setiap kali ada perubahan
+    }
+  }
+
+  // Fungsi untuk mereset tabel ke kondisi awal
+function resetTable() {
+  const tableBody = document.querySelector('#data-table tbody');
+  tableBody.innerHTML = ''; // Mengosongkan tabel
+  document.getElementById('Total_Price').value = '0.00'; // Mengatur Total Price ke 0
+  document.getElementById('Total_Harga_Jasa').value = '0.00'; // Mengatur Total Harga + Jasa ke 0
+}
+    // Fungsi untuk menghitung total harga dari tabel
+    function calculateTotalPrice() {
+    const tableRows = document.querySelectorAll('#data-table tbody tr');
+    let totalPrice = 0;
+
+    tableRows.forEach((row) => {
+      const promoPrice = parseFloat(row.querySelector('td:nth-child(6)').textContent) || 0;
+      totalPrice += promoPrice;
+    });
+
+    document.getElementById('Total_Price').value = totalPrice.toFixed(2);
+    calculateTotalHargaJasa();
+  }
+
+  // Memanggil fetchData() saat halaman dimuat
+  fetchData();
+</script>
+
+<script>
+  // Fungsi untuk menghitung total harga + total jasa
+  function calculateTotalHargaJasa() {
+    const totalHarga = parseFloat(document.getElementById('Total_Price').value) || 0;
+    const totalJasa = 3000000; // Total jasa sebesar 3.000.000
+    const totalHargaJasa = totalHarga + totalJasa;
+    document.getElementById('Total_Harga_Jasa').value = totalHargaJasa.toFixed(2);
+  }
+
+  // Panggil fungsi calculateTotalHargaJasa saat input Total_Price berubah
+  document.getElementById('Total_Price').addEventListener('input', calculateTotalHargaJasa);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+JnAjUeH4O5z5uPkNU5l+Qlq4ZP5fouJz9L2z+OGJc5O7Pxw" crossorigin="anonymous"></script>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <h1 class="judul-user">.</h1>
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <div class="col-lg text-center">
+              <h1>Cost Maintenance PC135</h1>
+              <div class="col-lg text-center">
+                <p>Check Maintenance Cost</p>
+              </div>
+            </div>
+
+            <div class="row" style="max-height: 1000px">
+              <div class="col-sm text-center"></div>
+            </div>
+
+            <div class="container mt-5">
+              <!-- Baris untuk menampilkan total jasa -->
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <label for="headerSelect" class="form-label">Pilih Jarak Interval:</label>
+                  <select id="headerSelect" class="form-select" onchange="filterTable()">
+                    <option value="None">Pilih Jarak Interval</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="1500">1500</option>
+                    <option value="2000">2000</option>
+                    <option value="2500">2500</option>
+                    <option value="3000">3000</option>
+                    <option value="3500">3500</option>
+                    <option value="4000">4000</option>
+                    <option value="4500">4500</option>
+                    <option value="5000">5000</option>
+                    <option value="5500">5500</option>
+                    <option value="6000">6000</option>
+                  </select>
+                </div>
+              </div>               
+
+              
+
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <table class="table table-bordered" id="data-table">
+                    <thead class="table-primary">
+                      <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Parts.No</th>
+                        <th>Qty</th>
+                        <th>Units</th>
+                        <th>Promo Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Tabel akan ditampilkan di sini -->
+                    </tbody>
+                  </table>
+                  <div class="row mt-3">
+                    <div class="col-md-3">
+                      <label for="Total_Price">Total Price (Rp)</label>
+                      <input type="text" class="result-hovered" id="Total_Price" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Baris untuk menampilkan total jasa -->
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <label for="Total_Jasa">Total Jasa (Rp)</label>
+                  <input type="text" class="result-hovered" id="Total_Jasa" value="3000000.00" disabled />
+                </div>
+              </div>
+              
+              <!-- Baris untuk menampilkan total harga + total jasa -->
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <label for="Total_Harga_Jasa">Total Harga + Jasa (Rp)</label>
+                  <input type="text" class="result-hovered" id="Total_Harga_Jasa" disabled />
+                </div>
+              </div>
+
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,339 @@
+/* Navbar */
+.navbar-brand {
+  font: 32px Viga;
+}
+
+/* Jumbotron */
+.jumbotron {
+  background: url(../img/jumbotron1.jpg);
+  background-size: cover;
+  height: 500px;
+  position: relative;
+  z-index: -1;
+}
+
+.jumbotron::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  bottom: 0;
+}
+
+.jumbotron .container {
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.jumbotron .display-4 {
+  font-weight: 200;
+  font-size: 2.6em;
+  margin-top: 100px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
+}
+
+.jumbotron .display-4 span {
+  font-weight: 500;
+}
+
+/*hmm ini buat wadah*/
+.wadah-slur {
+  background-color: white;
+  padding: 30px;
+  margin-top: -150px;
+  border-radius: 40px;
+  box-shadow: 0 3px 20px rgba(0, 247, 255, 0.459);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+}
+
+/* Info Panel */
+.info-panel {
+  background-color: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 30px;
+  box-shadow: 0 3px 20px rgba(0, 247, 255, 0.459);
+}
+.info-panel-info {
+  background-color: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 30px;
+  box-shadow: 0 3px 20px rgba(0, 225, 255, 0.6);
+}
+
+.info-panel-galeri {
+  background-color: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 5px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
+}
+
+.info-panel h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+.info-panel p {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #acacac;
+}
+
+/* Workingspace */
+.workingspace {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.workingspace img {
+  margin-bottom: 20px;
+}
+
+.workingspace h2 {
+  font-size: 52px;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.workingspace h2 span {
+  font-weight: 500;
+}
+
+.workingspace p {
+  font-size: 18px;
+  color: #acacac;
+  font-weight: 200;
+}
+
+/* Testimonial */
+.testimonial {
+  margin-top: 130px;
+}
+
+.testimonial p {
+  font-size: 1.4em;
+  text-align: center;
+  font-weight: 200;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.testimonial img {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  border-radius: 50%;
+  filter: grayscale(1);
+}
+
+.testimonial .img-main {
+  width: 100px;
+  height: 100px;
+  margin-top: -5px;
+  filter: grayscale(0);
+}
+
+.testimonial .info-text h5 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.testimonial .info-text p {
+  font-size: 12px;
+  margin-top: -5px;
+  color: #acacac;
+  font-style: normal;
+}
+
+/* Utility */
+.tombol {
+  border-radius: 40px;
+  text-transform: uppercase;
+}
+
+.judul-user,
+.nav-link {
+  color: rgba(0, 0, 0, 0) !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0);
+}
+
+/* RESPONSIVE */
+@media (min-width: 992px) {
+  .navbar {
+    padding-top: 20px;
+  }
+
+  .navbar-brand,
+  .nav-link {
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-link {
+    text-transform: uppercase;
+    margin-right: 20px;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    content: '';
+    display: block;
+    border-bottom: 3px solid #0b63dc;
+    margin: auto;
+    margin-bottom: -8px;
+    width: 50%;
+    padding-top: 5px;
+  }
+
+  .jumbotron {
+    margin-top: -90px;
+    height: 640px;
+  }
+
+  .jumbotron .display-4 {
+    font-size: 5em;
+    margin-top: 150px;
+  }
+  .jumbotron .display-5 {
+    font-size: 2em;
+    margin-top: 150px;
+  }
+
+  .workingspace {
+    text-align: left;
+  }
+
+  .testimonial p {
+    font-size: 2em;
+  }
+}
+
+.btn-holder {
+  width: 300px;
+  margin: 50px auto;
+}
+.btn-1 {
+  display: block;
+  border: none;
+  background: #f44336;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background 1s;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-1:hover {
+  background: #4caf50;
+}
+
+.btn-2 {
+  display: block;
+  margin: 0 auto; /* This will center the button horizontally */
+  border: 2px solid #008cba;
+  background: transparent;
+  padding: 10px 15px;
+  color: #008cba;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background 1s, color 1s;
+}
+.btn-2:hover {
+  background: #008cba;
+  color: #fff;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-2-hovered {
+  display: block;
+  margin: 0 auto; /* This will center the button horizontally */
+  border: 2px solid #008cba;
+  background: #008cba;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background 1s, color 1s;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-3 {
+  display: block;
+  border: 2px solid #4caf50;
+  background: transparent;
+  padding: 10px 15px;
+  color: #4caf50;
+  font-size: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 1s, color 1s;
+}
+.btn-3:hover {
+  color: #aaa;
+  border-color: #aaa;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-4 {
+  display: block;
+  border: 2px solid #e3c800;
+  background: transparent;
+  padding: 10px 15px;
+  color: #e3c800;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 1s, color 1s;
+}
+.btn-4:hover {
+  color: #aaa;
+  border-color: #aaa;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form-control.text-center {
+  display: block;
+  margin: 0 auto; /* Center the input horizontally */
+  width: 50%; /* Adjust the width as needed */
+}
+
+.result-hovered {
+  display: block;
+  margin: 0 auto; /* This will center the button horizontally */
+  border: 2px solid #008cba;
+  background: #008cba;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
+  /* cursor: pointer; */
+  outline: none;
+  transition: background 1s, color 1s;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

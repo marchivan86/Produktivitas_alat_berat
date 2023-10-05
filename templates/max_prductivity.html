@@ -1,0 +1,133 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc2() {
+      //Produktivitas_alat_gali_muat
+      // var Produktivitas_alat_gali_muat = parseFloat(document.getElementById('Produktivitas_alat_gali_muat').value);
+      var Kapasitas_munjung_bucket = parseFloat(document.getElementById('Kapasitas_munjung_bucket').value);
+      var Efisiensi_kerja = parseFloat(document.getElementById('Efisiensi_kerja').value);
+      var result_Bucket_Fill_Factor1 = parseFloat(document.getElementById('result_Bucket_Fill_Factor1').value);
+      var resultCycleTime1 = parseFloat(document.getElementById('resultCycleTime1').value);
+      var Swell_Factor = parseFloat(document.getElementById('Swell_Factor').value);
+
+      if (isNaN(Kapasitas_munjung_bucket) || isNaN(Efisiensi_kerja) || isNaN(result_Bucket_Fill_Factor1) || isNaN(resultCycleTime1) || isNaN(Swell_Factor)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultProductivity').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultProductivity').value = (Kapasitas_munjung_bucket * (3600 / resultCycleTime1) * result_Bucket_Fill_Factor1 * Swell_Factor * Efisiensi_kerja).toFixed(2) + ' BCM/Hour';
+      }
+    }
+
+    // document.getElementById('Produktivitas_alat_gali_muat').oninput = calc2;
+    document.getElementById('Kapasitas_munjung_bucket').oninput = calc2;
+    document.getElementById('Efisiensi_kerja').oninput = calc2;
+    document.getElementById('result_Bucket_Fill_Factor1').oninput = calc2;
+    document.getElementById('resultCycleTime1').oninput = calc2;
+    document.getElementById('Swell_Factor').oninput = calc2;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <!-- Tombol aksi -->
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/cycletime'" class="btn-2">Cycle Time</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/max_prductivity'" class="btn-2-hovered">Max Produktivity</button>
+                </div>
+              </div>
+              <!-- end Tombol aksi -->
+              <h5 class="judul-user">.</h5>
+              <hr />
+
+              <div class="col-lg text-center">
+                <h1>Max Productivity</h1>
+                <h5>Calculator</h5>
+              </div>
+              <hr />
+
+              <div class="row" style="max-height: 1000px">
+                <div class="col-lg text-center">
+                  <h5>Max Productivity</h5>
+
+                  <!-- <label for="Produktivitas_alat_gali_muat">Produktivitas alat gali muat (m3/jam)</label>
+                  <input type="text" class="form-control text-center" id="Produktivitas_alat_gali_muat" /> -->
+
+                  <label for="Kapasitas_munjung_bucket">Kapasitas munjung bucket (m3)</label>
+                  <input type="text" class="form-control text-center" id="Kapasitas_munjung_bucket" />
+
+                  <label for="Efisiensi_kerja">Efisiensi kerja</label>
+                  <input type="text" class="form-control text-center" id="Efisiensi_kerja" />
+
+                  <label for="result_Bucket_Fill_Factor1">Bucket Fill Factor</label>
+                  <input type="text" class="form-control text-center" id="result_Bucket_Fill_Factor1" />
+
+                  <label for="resultCycleTime1">Cycle time (detik)</label>
+                  <input type="text" class="form-control text-center" id="resultCycleTime1" />
+
+                  <label for="Swell_Factor">Swell Factor</label>
+                  <input type="text" class="form-control text-center" id="Swell_Factor" />
+
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultProductivity">Result Max. Productivity</label>
+                  <input type="text" class="form-control text-center" id="resultProductivity" disabled />
+                </div>
+
+                <div class="col-lg text-center">
+                  <h5>Max Productivity Formula</h5>
+                  <img src="static/img/Q.jpg" alt="Q" width="500" />
+                  <img src="static/img/produktivitas_table.jpg" alt="produktivitas_table" width="500" />
+                  <br />
+                  <br />
+
+                  <h5>Standard Bucket Fill Factor Berbagai Tipe Material</h5>
+                  <img src="static/img/Standard_Bucket_Fill_Factor.png" alt="Standard_Bucket_Fill_Factor" width="500" />
+                  <br />
+                  <br />
+
+                  <h5>Representative Swell for Different Classes of Earth</h5>
+                  <img src="static/img/Representative_Swell.png" alt="Representative_Swell" width="500" />
+                  <br />
+                  <br />
+
+                  <h5>Efisiensi Kerja untuk Berbagai Kondisi</h5>
+                  <img src="static/img/Efisiensi_Kerja_untuk_Berbagai_Kondisi.png" alt="Efisiensi_Kerja_untuk_Berbagai_Kondisi" width="500" />
+                </div>
+                <!-- <div class="col-sm text-center">
+                  <div class="col-lg text-center">
+                    <h5>Availability Table</h5>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.container -->
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

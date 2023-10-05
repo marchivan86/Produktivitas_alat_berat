@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+</html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet" />
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(){
+
+          window.addEventListener('scroll', function() {
+
+            if (window.scrollY > 200) {
+              document.getElementById('navbar_top').classList.add('fixed-top');
+              // add padding top to show content behind navbar
+              navbar_height = document.querySelector('.navbar').offsetHeight;
+              document.body.style.paddingTop = navbar_height + 'px';
+            } else {
+              document.getElementById('navbar_top').classList.remove('fixed-top');
+              // remove padding top from body
+              document.body.style.paddingTop = '0';
+            }
+          });
+        });
+        // DOMContentLoaded  end
+        </script>
+
+        <style type="text/css">
+          .fixed-top {
+              top: -40px;
+              transform: translateY(40px);
+              transition: transform .3s;
+          }
+        </style>
+  </head>
+  <body>
+
+    <!-- ============= COMPONENT ============== -->
+    <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark" style="background-color: #222831">
+      <div class="container">
+            <a class="navbar-brand" href="#">HEAVY EQUIPMENT PRODUCTIVITY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+          <div class="collapse navbar-collapse" id="main_nav">
+
+              <ul class="navbar-nav ms-auto">
+                <li>
+                <a class="nav-item nav-link active text-white tombol" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                {% if session['name'] %}
+                <li>
+                <a class="nav-item nav-link text-white tombol" href="/logout">Logout</a>
+                </li>
+                <li>
+                  <a class="nav-item nav-link btn btn-primary text-white tombol" href="#">Contact Us</a>
+                </li>
+
+                {% else %}
+                <li>
+                <a class="nav-item nav-link text-white tombol" href="/account_login">Login</a>
+                </li>
+                <li>
+                <a class="nav-item nav-link text-white tombolS" href="/account_register">Register</a>
+                </li>
+                {% endif %}
+              </ul>
+
+          </div> <!-- navbar-collapse.// -->
+      </div> <!-- container-fluid.// -->
+    </nav>
+                <!-- ============= COMPONENT NAVBAR END // ============== -->
+
+   {% block content %} {% endblock %}
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+    body {
+      background-color: #330000;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D18'/%3E%3Cstop offset='1' stop-color='%23330000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23FA3' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23FA3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-size: cover;
+      }
+
+  </style>
+  </body>
+
+  <!-- Testimonial -->
+  <section class="testimonial">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 justify-content-center d-flex">
+        <img src="/static/img/img2.png" alt="Testimonial 2" class="img-main" />
+      </div>
+    </div>
+    <div class="row justify-content-center info-text">
+      <div class="col-lg text-center">
+        <h5>HEAVY EQUIPMENT PRODUCTIVITY</h5>
+        <p>Realtime Calculator View</p>
+        <p>MARCH IVAN SANJAYA GIRSANG</p>
+        <p>D4 TEKNIK PENGELOLAAN DAN PERAWATAN ALAT BERAT</p>
+      </div>
+    </div>
+  </section>
+  <!-- end Testimonial -->
+
+</html>

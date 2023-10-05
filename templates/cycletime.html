@@ -1,0 +1,119 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc1() {
+      //Cycle time
+      var Excavating_time = parseFloat(document.getElementById('Excavating_time').value);
+      var Swing_time_Loaded = parseFloat(document.getElementById('Swing_time_Loaded').value);
+      var Dumping_Time = parseFloat(document.getElementById('Dumping_Time').value);
+      var Swing_time_empty = parseFloat(document.getElementById('Swing_time_empty').value);
+
+      if (isNaN(Excavating_time) || isNaN(Swing_time_Loaded) || isNaN(Dumping_Time) || isNaN(Swing_time_empty)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultCycleTime').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultCycleTime').value = (Excavating_time + Swing_time_Loaded + Dumping_Time + Swing_time_empty).toFixed(2) + ' S';
+      }
+    }
+
+    document.getElementById('Excavating_time').oninput = calc1;
+    document.getElementById('Swing_time_Loaded').oninput = calc1;
+    document.getElementById('Dumping_Time').oninput = calc1;
+    document.getElementById('Swing_time_empty').oninput = calc1;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <!-- Tombol aksi -->
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/cycletime'" class="btn-2-hovered">Cycle Time</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/max_prductivity'" class="btn-2">Max Produktivity</button>
+                </div>
+              </div>
+              <!-- end Tombol aksi -->
+              <h5 class="judul-user">.</h5>
+              <hr />
+
+              <div class="col-lg text-center">
+                <h1>Cycle Time</h1>
+                <h5>Calculator</h5>
+              </div>
+              <hr />
+
+              <div class="row" style="max-height: 1500px">
+                <div class="col-lg text-center">
+                  <h5>Cycle time</h5>
+
+                  <label for="Excavating_time">Excavating time (Second)</label>
+                  <input type="text" class="form-control text-center" id="Excavating_time" />
+
+                  <label for="Swing_time_Loaded">Swing time Loaded (Second)</label>
+                  <input type="text" class="form-control text-center" id="Swing_time_Loaded" />
+
+                  <label for="Dumping_Time">Dumping Time (Second)</label>
+                  <input type="text" class="form-control text-center" id="Dumping_Time" />
+
+                  <label for="Swing_time_empty">Swing time empty (Second)</label>
+                  <input type="text" class="form-control text-center" id="Swing_time_empty" />
+
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultCycleTime">Result Cycle Time</label>
+                  <input type="text" class="form-control text-center" id="resultCycleTime" disabled />
+                </div>
+
+                <div class="col-lg text-center">
+                  <h5>Cycle Time Formula</h5>
+                  <img src="static/img/cycletime.jpg" alt="cycletime" width="500" />
+                  <img src="static/img/cycletime_table.jpg" alt="cycletime_table" width="500" />
+                  <br />
+                  <br />
+
+                  <h5>Cycle time Standar untuk Excavator Merek Komatsu Edisi 30</h5>
+                  <img src="static/img/Cycle_Time_Standard.png" alt="Cycle_Time_Standard" width="500" />
+                  <br />
+                  <br />
+
+                  <h5>Conversion Factor for Excavator</h5>
+                  <img src="static/img/Conversion_Factor_for_Excavator.png" alt="cycletime_table" width="500" />
+                </div>
+
+                <!-- <div class="col-sm text-center">
+                  <div class="col-lg text-center">
+                    <h5>Availability Table</h5>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.container -->
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

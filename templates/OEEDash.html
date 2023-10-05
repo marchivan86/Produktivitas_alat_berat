@@ -1,0 +1,119 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc() {
+      //OEE
+      var Availability = parseFloat(document.getElementById('Availability').value);
+      var Utilization = parseFloat(document.getElementById('Utilization').value);
+      var Productivity = parseFloat(document.getElementById('Productivity').value);
+
+      if (isNaN(Availability) || isNaN(Utilization) || isNaN(Productivity)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultOEE').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultOEE').value = ((Availability * Utilization * Productivity) / 10000).toFixed(2) + ' %';
+      }
+    }
+
+    document.getElementById('Availability').oninput = calc;
+    document.getElementById('Utilization').oninput = calc;
+    document.getElementById('Productivity').oninput = calc;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <!-- Tombol aksi -->
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/AvailabilityDash'" class="btn-2">Availability</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/UtilizationDash'" class="btn-2">Utilization</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/ProductivityDash'" class="btn-2">Productivity Index</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/OEEDash'" class="btn-2-hovered">OEE Calculate</button>
+                </div>
+              </div>
+            </div>
+            <!-- end Tombol aksi -->
+            <h5 class="judul-user">.</h5>
+            <hr />
+
+            <div class="col-lg text-center">
+              <h1>OEE</h1>
+              <h5>Calculator</h5>
+            </div>
+            <hr />
+
+            <div class="row" style="max-height: 1000px">
+              <div class="col-sm text-center">
+                <div class="col-lg text-center">
+                  <h5>OEE</h5>
+                  <label for="Availability">Availability</label>
+                  <input type="text" class="form-control text-center" id="Availability" />
+
+                  <label for="Utilization">Utilization</label>
+                  <input type="text" class="form-control text-center" id="Utilization" />
+
+                  <label for="Productivity">Productivity</label>
+                  <input type="text" class="form-control text-center" id="Productivity" />
+
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultOEE">Result OEE</label>
+                  <input type="text" class="form-control text-center" id="resultOEE" disabled />
+                </div>
+              </div>
+
+              <div class="col-sm">
+                <div class="col-lg text-center">
+                  <h5>Utilization Formula</h5>
+                  <br />
+                  <br />
+                  <br />
+                  <img src="static/img/oee.jpg" alt="oee" width="500" />
+                </div>
+              </div>
+
+              <!-- <div class="col-sm text-center">
+                <div class="col-lg text-center">
+                  <h5>Productivity Index</h5>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

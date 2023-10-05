@@ -1,0 +1,49 @@
+{% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block content %}
+
+<title>HEAVY EQUIPMENT PRODUCTIVITY</title>
+
+<!-- Jumbotron -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><span>HEAVY EQUIPMENT PRODUCTIVITY</span></h1>
+    <h3 class="display-5"><span>Web Apps</span></h3>
+  </div>
+</div>
+<!-- akhir Jumbotron -->
+
+<div class="container">
+  <!-- info mobil listrik -->
+  <div class="row justify-content-center">
+    <div class="col wadah-slur">
+      <div class="col-lg text-center">
+        <h1>Produktifitas Alat Berat</h1>
+      </div>
+      <div class="row"></div>
+      <div class="col-lg text-center">
+        <h2>Intro</h2>
+        <p>
+          Produktivitas alat berat adalah ukuran seberapa efisien alat berat dalam menyelesaikan tugas-tugasnya. Faktor-faktor seperti kualitas operator, perawatan, lingkungan kerja, dan perencanaan proyek dapat memengaruhi produktivitas
+          alat berat. Produktivitas yang tinggi membantu proyek mencapai tujuannya secara lebih efisien.
+        </p>
+
+        <div class="col-lg text-center">
+          <h1>PC135 10M0 BROCURE</h1>
+        </div>
+
+        <div id="pdf-container"></div>
+        <div id="viewer" style="width: 100%; height: 1500px"></div>
+        <script type="text/javascript" src="https://cloudpdf.io/viewer.min.js"></script>
+        <script>
+          const config = {
+            documentId: 'b5843fe3-7469-40ef-ab9d-06d1eb42baaa',
+            darkMode: true,
+          };
+          CloudPDF(config, document.getElementById('viewer')).then((instance) => {});
+        </script>
+      </div>
+    </div>
+  </div>
+  <!-- end info mobil listrik -->
+</div>
+
+{% endblock %}

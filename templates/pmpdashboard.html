@@ -1,0 +1,67 @@
+{% extends 'layoutadmin.html' %} {% block title %} PMP Dashboard {% endblock %} {% block content %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <div class="col-lg text-center">
+              <h1>PMP</h1>
+              <div class="col-lg text-center">
+                <p>Preventive Maintenance Package</p>
+              </div>
+              <h5 class="judul-user">.</h5>
+            </div>
+
+            <p>Keuntungan Program PMP<br>
+              a. Penambahan masa garansi menjadi 4000 hours (dua tahun) sampai 10000 hours (lima tahun).<br>
+              b. Gratis Maintenance Service sampai 4000 hours (dua tahun) atau 10000 hours (lima tahun).<br>
+              c. Gratis Part Service (Filter kit + Oli) sampai servis 4000 hours atau 10000 hours.<br>
+              d. Gratis ganti Injector jika terjadi problem selama masa garansi 4000 hours atau 10000 hours.<br>
+              e. Jaminan garansi untuk control valve sampai dengan 4000 hours atau 10000 hours.<br>
+              f. Kunjungan Mekanik setiap 500 hours.<br>
+              g. Respon cepat dealer.<br>
+              h. Life Cycle Cost (LCC) lebih rendah.<br>
+              i. Componen yang ter-cover lebih banyak yaitu: Engine Block, Crankshaft, Camshaft, Cylinder Head, Con Road, Turbocharger, Fuel Supply Pump, Injector, Water Pump, Damper, Swing Motor, Swing Machinery, Swing Circle, Final Drive, Travel Motor, Main Pump.<br>
+              j. Mendapatkan Summary Report yang berisi:<br>
+              1. KOMTRAX Report.<br>
+              2. Maintenance Audit (combine with Customer Maintenance Improvement Program).<br>
+              3. Operation Sugested Report.<br>
+              4. Customer Operation Improvement Program (COIP).<br>
+              </p>
+
+            <div class="row" style="max-height: 10000px">
+              <div id="pdf-container"></div>
+              <div id="viewer1" style="width: 100%; height: 800px;"></div>
+              <script type="text/javascript" src="https://cloudpdf.io/viewer.min.js"></script>
+              <script>
+              const config1 = { 
+              documentId: '732be443-ff5e-4114-8728-40a9f9437857',
+              darkMode: true, 
+              };
+              CloudPDF(config1, document.getElementById('viewer1')).then((instance) => {
+              });
+              </script>
+              
+            </div>
+          </div>
+
+          <!-- /.container -->
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+
+    {% endblock %}
+  </div>
+</div>

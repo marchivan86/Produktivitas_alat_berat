@@ -1,0 +1,125 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc2() {
+      //ActualProductivity
+      var ActualProductivity = parseFloat(document.getElementById('ActualProductivity').value);
+      var MaxProductivity = parseFloat(document.getElementById('MaxProductivity').value);
+      var Eficiency = parseFloat(document.getElementById('Eficiency').value);
+      var FillFactor = parseFloat(document.getElementById('FillFactor').value);
+
+      if (isNaN(ActualProductivity) || isNaN(MaxProductivity) || isNaN(Eficiency) || isNaN(FillFactor)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultProductivityIndex').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultProductivityIndex').value = ((ActualProductivity / (MaxProductivity * Eficiency * FillFactor)) * 100).toFixed(2) + ' %';
+      }
+    }
+
+    document.getElementById('ActualProductivity').oninput = calc2;
+    document.getElementById('MaxProductivity').oninput = calc2;
+    document.getElementById('Eficiency').oninput = calc2;
+    document.getElementById('FillFactor').oninput = calc2;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <!-- Tombol aksi -->
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/AvailabilityDash'" class="btn-2">Availability</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/UtilizationDash'" class="btn-2">Utilization</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/ProductivityDash'" class="btn-2-hovered">Productivity Index</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/OEEDash'" class="btn-2">OEE Calculate</button>
+                </div>
+              </div>
+            </div>
+            <!-- end Tombol aksi -->
+            <h5 class="judul-user">.</h5>
+            <hr />
+
+            <div class="col-lg text-center">
+              <h1>Productivity Index</h1>
+              <h5>Calculator</h5>
+            </div>
+            <hr />
+
+            <div class="row" style="max-height: 1000px">
+              <div class="col-sm text-center">
+                <div class="col-lg text-center">
+                  <h5>Productivity Index</h5>
+                  <label for="ActualProductivity">Actual Productivity</label>
+                  <input type="text" class="form-control text-center" id="ActualProductivity" />
+
+                  <label for="MaxProductivity">Max. Productivity</label>
+                  <input type="text" class="form-control text-center" id="MaxProductivity" />
+
+                  <label for="Eficiency">Eficiency</label>
+                  <input type="text" class="form-control text-center" id="Eficiency" />
+
+                  <label for="FillFactor">Fill Factor</label>
+                  <input type="text" class="form-control text-center" id="FillFactor" />
+
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultProductivityIndex">Result Productivity Index</label>
+                  <input type="text" class="form-control text-center" id="resultProductivityIndex" disabled />
+                </div>
+              </div>
+
+              <div class="col-sm">
+                <div class="col-lg text-center">
+                  <h5>Productivity Index Formula</h5>
+                  <br />
+                  <br />
+                  <br />
+                  <img src="static/img/produktivityindex.jpg" alt="produktivitas" width="500" />
+                  <!-- <img src="static/img/produktivitas_table.jpg" alt="produktivitas_table" width="500" /> -->
+                </div>
+              </div>
+
+              <!-- <div class="col-sm text-center">
+                <div class="col-lg text-center">
+                  <h5>Productivity XX</h5>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

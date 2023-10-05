@@ -1,0 +1,173 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc() {
+      //Bucket Fill Factor
+      var Volume_nyata_atau_kapasitas_nyata_mangkuk = parseFloat(document.getElementById('Volume_nyata_atau_kapasitas_nyata_mangkuk').value);
+      var Volume_munjung_teoritis_mangkuk = parseFloat(document.getElementById('Volume_munjung_teoritis_mangkuk').value);
+
+      if (isNaN(Volume_nyata_atau_kapasitas_nyata_mangkuk) || isNaN(Volume_munjung_teoritis_mangkuk)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('result_Bucket_Fill_Factor').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('result_Bucket_Fill_Factor').value = ((Volume_nyata_atau_kapasitas_nyata_mangkuk / Volume_munjung_teoritis_mangkuk) * 100).toFixed(0);
+        document.getElementById('result_Bucket_Fill_Factor1').value = ((Volume_nyata_atau_kapasitas_nyata_mangkuk / Volume_munjung_teoritis_mangkuk) * 100).toFixed(0);
+        //calc2();
+      }
+    }
+
+    function calc1() {
+      //Cycle time
+      var Excavating_time = parseFloat(document.getElementById('Excavating_time').value);
+      var Swing_time_Loaded = parseFloat(document.getElementById('Swing_time_Loaded').value);
+      var Dumping_Time = parseFloat(document.getElementById('Dumping_Time').value);
+      var Swing_time_empty = parseFloat(document.getElementById('Swing_time_empty').value);
+
+      if (isNaN(Excavating_time) || isNaN(Swing_time_Loaded) || isNaN(Dumping_Time) || isNaN(Swing_time_empty)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultCycleTime').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultCycleTime').value = (Excavating_time + Swing_time_Loaded + Dumping_Time + Swing_time_empty).toFixed(2);
+        document.getElementById('resultCycleTime1').value = (Excavating_time + Swing_time_Loaded + Dumping_Time + Swing_time_empty).toFixed(2);
+        //calc2();
+      }
+    }
+
+    function calc2() {
+      //Availability
+      var Produktivitas_alat_gali_muat = parseFloat(document.getElementById('Produktivitas_alat_gali_muat').value);
+      var Kapasitas_munjung_bucket = parseFloat(document.getElementById('Kapasitas_munjung_bucket').value);
+      var Efisiensi_kerja = parseFloat(document.getElementById('Efisiensi_kerja').value);
+      var result_Bucket_Fill_Factor1 = parseFloat(document.getElementById('result_Bucket_Fill_Factor1').value);
+      var resultCycleTime1 = parseFloat(document.getElementById('resultCycleTime1').value);
+      var Swell_Factor = parseFloat(document.getElementById('Swell_Factor').value);
+
+      if (isNaN(Produktivitas_alat_gali_muat) || isNaN(Kapasitas_munjung_bucket) || isNaN(Efisiensi_kerja) || isNaN(result_Bucket_Fill_Factor1) || isNaN(resultCycleTime1) || isNaN(Swell_Factor)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultProductivity').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultProductivity').value = (Produktivitas_alat_gali_muat * (3600 / resultCycleTime1) * result_Bucket_Fill_Factor1 * Swell_Factor * Efisiensi_kerja).toFixed(2);
+      }
+    }
+
+    document.getElementById('Volume_nyata_atau_kapasitas_nyata_mangkuk').oninput = calc;
+    document.getElementById('Volume_munjung_teoritis_mangkuk').oninput = calc;
+
+    document.getElementById('Excavating_time').oninput = calc1;
+    document.getElementById('Swing_time_Loaded').oninput = calc1;
+    document.getElementById('Dumping_Time').oninput = calc1;
+    document.getElementById('Swing_time_empty').oninput = calc1;
+
+    document.getElementById('Produktivitas_alat_gali_muat').oninput = calc2;
+    document.getElementById('Kapasitas_munjung_bucket').oninput = calc2;
+    document.getElementById('Efisiensi_kerja').oninput = calc2;
+    document.getElementById('result_Bucket_Fill_Factor1').oninput = calc2;
+    document.getElementById('resultCycleTime1').oninput = calc2;
+    document.getElementById('Swell_Factor').oninput = calc2;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <div class="col-lg text-center">
+              <h1>PRODUKTIFITAS ALAT BERAT</h1>
+              <div class="col-lg text-center">
+                <p>Calculator</p>
+              </div>
+              <h5 class="judul-user">.</h5>
+            </div>
+
+            <div class="row" style="max-height: 1500px">
+              <!-- <div class="col-sm text-center">
+                <div class="col-lg text-center">
+                  <h5>Bucket Fill Factor</h5>
+                  <div class="col-md-7">
+                    <label for="Volume_nyata_atau_kapasitas_nyata_mangkuk">Volume nyata atau kapasitas nyata mangkuk (m3)</label>
+                    <input type="text" class="form-control text-center" id="Volume_nyata_atau_kapasitas_nyata_mangkuk" />
+
+                    <label for="Volume_munjung_teoritis_mangkuk">Volume munjung teoritis mangkuk (m3)</label>
+                    <input type="text" class="form-control text-center" id="Volume_munjung_teoritis_mangkuk" /> -->
+
+                    <!-- Remove the button, and the calculation will happen automatically -->
+                    <!-- <label for="result_Bucket_Fill_Factor">result_Bucket_Fill_Factor</label>
+                    <input type="text" class="form-control text-center" id="result_Bucket_Fill_Factor" disabled />
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="col-lg text-center">
+                <h5>Cycle time</h5>
+                <div class="col-md-7">
+                  <label for="Excavating_time">Excavating time (detik)</label>
+                  <input type="text" class="form-control text-center" id="Excavating_time" />
+
+                  <label for="Swing_time_Loaded">Swing time Loaded (detik)</label>
+                  <input type="text" class="form-control text-center" id="Swing_time_Loaded" />
+
+                  <label for="Dumping_Time">Dumping Time </label>
+                  <input type="text" class="form-control text-center" id="Dumping_Time" />
+
+                  <label for="Swing_time_empty">Swing time empty (detik)</label>
+                  <input type="text" class="form-control text-center" id="Swing_time_empty" />
+
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultCycleTime">Result Cycle Time</label>
+                  <input type="text" class="form-control text-center" id="resultCycleTime" disabled />
+                </div>
+              </div>
+
+              <div class="col-lg text-center">
+                <h5>Produktivitas</h5>
+                <div class="col-md-7">
+                  <label for="Produktivitas_alat_gali_muat">Produktivitas alat gali muat (m3/jam)</label>
+                  <input type="text" class="form-control text-center" id="Produktivitas_alat_gali_muat" />
+  
+                  <label for="Kapasitas_munjung_bucket">Kapasitas munjung bucket (m3)</label>
+                  <input type="text" class="form-control text-center" id="Kapasitas_munjung_bucket" />
+  
+                  <label for="Efisiensi_kerja">Efisiensi kerja</label>
+                  <input type="text" class="form-control text-center" id="Efisiensi_kerja" />
+  
+                  <label for="result_Bucket_Fill_Factor1">Bucket Fill Factor</label>
+                  <input type="text" class="form-control text-center" id="result_Bucket_Fill_Factor1" />
+  
+                  <label for="resultCycleTime1">Cycle time (detik)</label>
+                  <input type="text" class="form-control text-center" id="resultCycleTime1" />
+  
+                  <label for="Swell_Factor">Swell Factor</label>
+                  <input type="text" class="form-control text-center" id="Swell_Factor" />
+  
+                  <!-- Remove the button, and the calculation will happen automatically -->
+                  <label for="resultProductivity">Result Max. Productivity</label>
+                  <input type="text" class="form-control text-center" id="resultProductivity" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.container -->
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <h5 class="judul-user">.</h5>
+
+    {% endblock %}
+  </div>
+</div>

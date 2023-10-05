@@ -1,0 +1,117 @@
+{% extends 'layoutadmin.html' %} {% block title %} Dashboard Admin {% endblock %} {% block content %}
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calc() {
+      //Availability
+      var MOHH = parseFloat(document.getElementById('MOHH').value);
+      var BreakdownSchedule = parseFloat(document.getElementById('BreakdownSchedule').value);
+      var BreakdownUnschedule = parseFloat(document.getElementById('BreakdownUnschedule').value);
+
+      if (isNaN(MOHH) || isNaN(BreakdownSchedule) || isNaN(BreakdownUnschedule)) {
+        // Jika salah satu atau kedua input menghasilkan NaN, tampilkan pesan "Lengkapi Data"
+        document.getElementById('resultAvailability').value = 'Lengkapi Data';
+      } else {
+        // Jika kedua input adalah angka yang valid, lakukan perhitungan dan tampilkan hasilnya
+        document.getElementById('resultAvailability').value = (((MOHH - (BreakdownSchedule + BreakdownUnschedule)) / MOHH) * 100).toFixed(2) + ' %';
+      }
+    }
+
+    document.getElementById('MOHH').oninput = calc;
+    document.getElementById('BreakdownSchedule').oninput = calc;
+    document.getElementById('BreakdownUnschedule').oninput = calc;
+  });
+</script>
+
+<h5 class="judul-user">.</h5>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="col text-center">
+        <div class="row justify-content-center">
+          <div class="col wadah-slur">
+            <!-- Tombol aksi -->
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/AvailabilityDash'" class="btn-2-hovered">Availability</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/UtilizationDash'" class="btn-2">Utilization</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/ProductivityDash'" class="btn-2">Productivity Index</button>
+                </div>
+
+                <div class="col text-center">
+                  <h5 class="judul-user">.</h5>
+                  <button onclick="location.href='/OEEDash'" class="btn-2">OEE Calculate</button>
+                </div>
+              </div>
+              <!-- end Tombol aksi -->
+              <h5 class="judul-user">.</h5>
+              <hr />
+
+              <div class="col-lg text-center">
+                <h1>Availability</h1>
+                <h5>Calculator</h5>
+              </div>
+              <hr />
+
+              <div class="row" style="max-height: 1000px">
+                <div class="col-sm text-center">
+                  <div class="col-lg text-center">
+                    <h5>Availability</h5>
+                    <label for="MOHH">Machine on Hands Hours</label>
+                    <input type="text" class="form-control text-center" id="MOHH" />
+
+                    <label for="BreakdownSchedule">Breakdown Schedule</label>
+                    <input type="text" class="form-control text-center" id="BreakdownSchedule" />
+
+                    <label for="BreakdownUnschedule">Breakdown Unschedule</label>
+                    <input type="text" class="form-control text-center" id="BreakdownUnschedule" />
+
+                    <!-- Remove the button, and the calculation will happen automatically -->
+                    <label for="resultAvailability">Result Availability</label>
+                    <input type="text" class="form-control text-center" id="resultAvailability" disabled />
+                  </div>
+                </div>
+
+                <div class="col-sm">
+                  <div class="col-lg text-center">
+                    <h5>Availability Formula</h5>
+                    <img src="static/img/availablility.jpg" alt="Availability" width="500" />
+                    <img src="static/img/availablility_table.jpg" alt="availablility_table" width="500" />
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm text-center">
+                  <div class="col-lg text-center">
+                    <h5>Availability Table</h5>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.container -->
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>
